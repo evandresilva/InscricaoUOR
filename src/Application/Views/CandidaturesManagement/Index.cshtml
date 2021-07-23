@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Gestão de inscrições";
+    @model IPagedList<CandidateDTOOutput>
+    string filter = ViewBag.Filter ?? null;
+    var begin = ViewBag.Begin as DateTime?;
+    var end = ViewBag.End as DateTime?;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <h6>Todas incrições</h6>
+                </div>
+                <div class="card-body  pt-0 pb-2">
+                    <div class="search-area col-md-12 mb-2">
+                        <form action="candidaturesManagement" method="get">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control" value="@filter" name="filter" placeholder="Pesquisa de nome, bi e pass." />
+                                            @if (!string.IsNullOrWhiteSpace(filter))
+                                            {
+                                                <a href=@Url.Action("Index", new { page=1, end,begin}) class="ml-2 btn" onclick=""> <i class="fas fa-times"></i> </a>
+                                            }
+                                            <button type="submit" class="ml-2 btn" onclick=""> <i class="fa fa-search"></i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <hr />
+                    </div>
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-5">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BI</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Passaporte</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nacionalidade</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Licenciatura</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Curso</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
+                                    <th class="text-end opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="text-sm-center">
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@(item.BINumber ?? "N/A")</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@(item.PassportNumber ?? "N/A")</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@item.Name</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@item.Nationality</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@item.Graduation</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">@item.Course</p>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-xs font-weight-bold">@item.BirthdateF</span>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            <span class="badge badge-sm bg-gradient-success">@item.Status</span>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="/candidaturesManagement/Details/@item.Id" class="text-secondary font-weight-bold btn-sm bg-gradient-dark text-white" data-toggle="tooltip" data-original-title="Ver detalhes">
+                                                Ver
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <hr />
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = 1, filter, begin, end }),
+                       new PagedListRenderOptionsBase
+                       {
+                           DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                           DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                           DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                           DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                           LinkToFirstPageFormat = "Ínicio",
+                           LinkToPreviousPageFormat = "<span class='fa fa-chevron-left'></span>",
+                           LinkToNextPageFormat = "<span class='fa fa-chevron-right'></span>",
+                           LinkToLastPageFormat = "Fim",
+                           ContainerDivClasses = new string[] { "d-flex justify-content-end" },
+                           UlElementClasses = new string[] { "pagination" },
+                           LiElementClasses = new string[] { "page-item  btn-secundary" },
+                           PageClasses = new string[] { "page-link" },
+                       }
+                       )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
