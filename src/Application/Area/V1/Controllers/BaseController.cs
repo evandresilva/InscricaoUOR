@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Dalgy.Web.Areas.V1.Controllers
+namespace Application.Areas.V1.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]

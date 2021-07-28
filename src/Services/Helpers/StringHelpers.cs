@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
@@ -8,6 +10,19 @@ namespace Services.Helpers
 {
     public static class StringHelpers
     {
+
+        public static string ToJson(this object o)
+        {
+            var ret = JsonConvert.SerializeObject(o,
+                formatting: Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                   ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    PreserveReferencesHandling = PreserveReferencesHandling.None
+                });
+            return string.IsNullOrEmpty(ret) ? "[]" : ret;
+        }
         public static string ToPhoneNumber(this string phone)
         {
             try

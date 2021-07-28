@@ -8,5 +8,6 @@ namespace Services.Models.DTO
     {
         public List<CountryDTO> Countries { get; set; }
         public List<CityDTO> Cities{ get; set; }
+        public List<GraduationDTO> Graduations{ get; set; }
     }
 }

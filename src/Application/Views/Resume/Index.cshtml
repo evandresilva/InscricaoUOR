@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "Formulário";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
+    @model CandidateDTOOutput;
+}
+<div class="container-sucess">
+    <div class="wrapper-sucess">
+        <div  id="section-to-print" >
+            <h1 class="main-title">Informações do Candidato Nº @Model.OrderNumber - Formulário de Inscrição ÚOR Ano Lectivo 2021-2022</h1>
+            <div class="data-wrapper">
+                <h1>Dados Pessoais</h1>
+                <ul class="list-wrapper">
+                    <li>
+                        <p>Nome Completo:</p>
+                        <span>@Model.Name</span>
+                    </li>
+                    <li>
+                        <p>Data de Nascimento:</p>
+                        <span>@Model.Birthdate.ToString("dd-MM-yyyy")</span>
+                    </li>
+                    <li>
+                        <p>Estado Civíl:</p>
+                        <span>@Model.MaritalStatus</span>
+                    </li>
+                    <li>
+                        <p>Sexo:</p>
+                        <span>@Model.Gender</span>
+                    </li>
+                    <li>
+                        <p>Nome da Mãe:</p>
+                        <span>@Model.MothersName</span>
+                    </li>
+                    <li>
+                        <p>Nome do Pai:</p>
+                        <span>@Model.FathersName</span>
+                    </li>
+                    <li>
+                        <p>Nº do BI:</p>
+                        <span>@Model.BINumber</span>
+                    </li>
+                    <li>
+                        <p>Nº do Passaporte:</p>
+                        <span>@Model.PassportNumber</span>
+                    </li>
+                    <li>
+                        <p>Nacionaliade:</p>
+                        <span>@Model.Nationality</span>
+                    </li>
+                    <li>
+                        <p>Província:</p>
+                        <span>@Model.City</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="data-wrapper">
+                <h1>Dados Acadêmicos</h1>
+                <ul class="list-wrapper">
+                    <li>
+                        <p>Licenciatura:</p>
+                        <span>@Model.Graduation</span>
+                    </li>
+                    <li>
+                        <p>Curso:</p>
+                        <span>@Model.Course</span>
+                    </li>
+                    <li>
+                        <p>Ano de Conclusão de Ensino Médio:</p>
+                        <span>@Model.HightSchoolFinishedYear</span>
+                    </li>
+                    <li>
+                        <p>Escola de Ensino Médio:</p>
+                        <span>@Model.HighSchool</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="data-wrapper">
+                <h1>Dados Adicionais</h1>
+                <ul class="list-wrapper">
+                    <li>
+                        <p>Regime:</p>
+                        <span>@Model.Regime</span>
+                    </li>
+                    @if (Model.RegimeId == 2)
+                    {
+                        <li>
+                            <p>Entidade patronal:</p> 
+                            <span>@Model.EmployerEntity</span>
+                        </li>
+                        <li>
+                            <p>Sector:</p>
+                            <span>@Model.Sector</span>
+                        </li>
+
+                        <li>
+                            <p>Profissão:</p>
+                            <span>@Model.Profession</span>
+                        </li>
+                        <li>
+                            <p>Cargo:</p>
+                            <span>@Model.Position</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <button class=".no-print" onclick="window.print()">
+            Imprimir
+        </button>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function PrintElem(elem) {
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html ><head> <title>' + document.title + '</title>');
+            mywindow.document.write('</head><body>');
+            mywindow.document.write('<h1>' + document.title  + '</h1>');
+            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        }
+    </script>
+}

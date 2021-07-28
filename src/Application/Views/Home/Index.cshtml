@@ -1,150 +1,603 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard";
-    @model DashboardDTO;
+    ViewData["Title"] = "Formulário";
+    Layout = "~/Views/Shared/_FormLayout.cshtml";
 }
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total incritos</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    @Model.TotalInscribed
-                                @*    <span class="text-success text-sm font-weight-bolder">+3%</span>*@
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                <i class="fab fa-wpforms text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Inscritos hoje</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    + @Model.TotalNewsCandidates
-                                    @*<span class="text-danger text-sm font-weight-bolder">-2%</span>*@
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                <i class="fab fa-wpforms text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Fase de exame</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    @Model.TotalExam
-                                    @*<span class="text-success text-sm font-weight-bolder">+100</span>*@
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                <i class="fab fa-wpforms text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Rejeitados</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    @Model.TotalRejected
-                                    @*<span class="text-success text-sm font-weight-bolder">10</span>*@
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
-                                <i class="fab fa-wpforms text-white"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-6">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Inscritos Recentemente</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-5">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BI</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Passaporte</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Licenciatura</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Curso</th>
-                                    <th class="text-end opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.RecentCandidates)
-                                {
-                                <tr class="text-sm-center">
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@(item.BINumber ?? "N/A")</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@(item.PassportNumber ?? "N/A")</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.Name</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.Graduation</p>
-                                    </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.Course</p>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="/candidaturesManagement/Details/@item.Id" class="text-secondary font-weight-bold btn-sm bg-gradient-info text-white" data-toggle="tooltip" data-original-title="Edit user">
-                                            Ver
-                                        </a>
-                                    </td>
-                                </tr>
-                                }
 
-                            </tbody>
-                        </table>
+<div id="app" class="">
+    <div class="container">
+        <form id="form-candidature" action="" class="wrapper" v-on:submit.prevent="save();">
+            <div class="logo-container">
+
+            </div>
+            <h1 class="main-title">
+                Formulário de Inscrição ÚOR Ano Lectivo 2021-2022
+            </h1>
+
+            <section class="steps-container">
+                <div class="step" v-bind:class="{'active-step':section1 || section2 || section3}">
+                    <p class="title">Dados Pessoais</p>
+                    <div class="naveagtion">
+                        <div class="circle">
+                            <p>1</p>
+                        </div>
+                        <div class="line">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="step" v-bind:class="{'active-step':section2 || section3}">
+                    <p class="title">Dados Académicos</p>
+                    <div class="naveagtion">
+                        <div class="circle">
+                            <p>2</p>
+                        </div>
+                        <div class="line">
+                        </div>
+                    </div>
+                </div>
+                <div class="step" v-bind:class="{'active-step':section3}">
+                    <p class="title">Dados Adicionais</p>
+                    <div class="naveagtion">
+                        <div class="circle">
+                            <p>3</p>
+                        </div>
+                        <div class="line">
+                        </div>
+                        <div class="circle">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section v-if="section1" class="step-one">
+                <div class="form-container">
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="full_name">Nome Completo</label>
+                                <input 
+                                       type="text"
+                                       v-model="candidate.name"
+                                       name="full_name"
+                                       id="full_name">
+                            </div>
+                        </div>
+                        <div class="input-container-two-items">
+                            <div class="input-wrapper">
+                                <label for="born_date">Data de Nascimento</label>
+                                <input 
+                                       type="date"
+                                       name="born_date"
+                                       id="born_date"
+                                       v-model="candidate.birthdate">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="marital_status">Estado Civil</label>
+                                <select id="marital_status"
+                                        name="marital_status"
+                                        v-model="candidate.maritalStatusId">
+                                    <option value="1">Solteiro</option>
+                                    <option value="2">Casado</option>
+                                    @*<option value="divorciado">Divorciado</option>
+                                        <option value="viuvo">Vúvo</option>*@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="telephone">Telemóvel</label>
+                                <input 
+                                       type="tel"
+                                       name="telephone"
+                                       id="telephone"
+                                       v-model="candidate.phoneNumber">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="email">E-Mail</label>
+                                <input 
+                                       type="email"
+                                       name="email"
+                                       id="email"
+                                       v-model="candidate.email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gender-container">
+                        <h1>Sexo</h1>
+                        <label for="male">Masculino</label>
+                        <input value="1"
+                               type="radio"
+                               checked
+                               name="gender"
+                               id="male"
+                               v-model="candidate.genderId">
 
+                        <label for="female">Feminino</label>
+                        <input value="2"
+                               type="radio"
+                               name="gender"
+                               id="female"
+                               v-model="candidate.genderId">
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="mon_name">Nome da Mãe</label>
+                                <input 
+                                       type="text"
+                                       name="mon_name"
+                                       id="mon_name"
+                                       v-model="candidate.mothersName">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="dad_name">Nome do Pai</label>
+                                <input 
+                                       type="text"
+                                       name="dad_name"
+                                       id="dad_name"
+                                       v-model="candidate.fathersName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="bi_number">Nº de Bilhete de Identidade</label>
+                                <input 
+                                       type="text"
+                                       name="bi_number"
+                                       id="bi_number"
+                                       v-bind:disabled="candidate.nationalityId!=1"
+                                       v-model="candidate.biNumber">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="pass_number">Nº de Passaporte</label>
+                                <input 
+                                       type="text"
+                                       name="pass_number"
+                                       id="pass_number"
+                                       v-bind:disabled="candidate.nationalityId==1"
+                                       v-model="candidate.passportNumber">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container-two-items">
+                            <div class="input-wrapper">
+                                <label for="nationality">Nacionalidade</label>
+                                <select id="nationality"
+                                        name="nationality"
+                                        v-model="candidate.nationalityId">
+                                    <option v-for="i in lists.countries" :value="i.id">{{i.name}}</option>
+                                </select>
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="province">Provincia</label>
+                                <select id="province"
+                                        name="province"
+                                        v-model="candidate.cityId">
+                                    <option v-for="i in lists.cities" :value="i.id">{{i.name}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-container-one-item type2">
+                            <div class="input-wrapper iw-tp2">
+                                <label for="file_verification">Anexar Arquivo de Identificação</label>
+                                <input class="no-border-button"
+                                       v-on:change="uploadDocument($event);"
+                                       
+                                       type="file"
+                                       name="file_verification"
+                                       id="file_verification">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="next-step-container">
+                        <div class="btn cancel">
+                            Cancelar Inscrição
+                        </div>
+                        <button type="submit" class="btn next">
+                            Seguinte
+                        </button>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </section>
+            <section v-if="section2" class="step-two">
+                <div class="form-container">
+                    <div class="form-row">
+                        @*<div class="input-container-one-item">
+                                <div class="input-wrapper">
+                                    <label for="literary_abilities">Habilitações Literárias</label>
+                                    <input type="text" name="literary_abilities" id="literary_abilities">
+                                </div>
+                            </div>*@
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="graduation">Opção</label>
+                                <select id="graduation "
+                                        
+                                        v-model="graduation"
+                                        name="option">
+                                    <option selected disabled>Licenciatura</option>
+                                    <option v-for="i in lists.graduations" :value="i">{{i.name}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="course_to_apply">Curso a se candidatar</label>
+                                <select id="course_to_apply"
+                                        
+                                        name="course_to_apply"
+                                        v-model="candidate.courseId">
+                                    <option selected disabled>Curso</option>
+                                    <option v-for="i in graduation.courses" :value="i.id">{{i.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="finished_school">Escola onde concluiu</label>
+                                <input type="text"
+                                       
+                                       name="finished_school"
+                                       id="finished_school"
+                                       v-model="candidate.highSchool">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item type2">
+                            <div class="input-wrapper iw-tp2">
+                                <label for="hight_school_cert">Anexar Certificado de Ensino Médio</label>
+                                <input  type="file"
+                                       name="hight_school_cert"
+                                       id="hight_school_cert"
+                                       v-on:change="uploadhighSchoolCertificate($event)">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="next-step-container">
+                        <div v-on:click="step1" class="btn cancel">
+                            Voltar
+                        </div>
+                        <button type="submit" class="btn next">
+                            Seguinte
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <section v-if="section3" class="step-tree">
+                <div class="form-container">
+                    <div class="gender-container">
+                        <h1>Exerce Actividade Profissional?</h1>
+                        <label for="no">Não</label>
+                        <input type="radio"
+                               name="candidate.regimeId"
+                               id="no"
+                               v-model="candidate.regimeId"
+                               value="1"
+                               v-on:click="toggle">
+                        <label for="yes">Sim</label>
+                        <input type="radio"
+                               name="candidate.regimeId"
+                               v-model="candidate.regimeId"
+                               id="yes"
+                               value="2"
+                               v-on:click="toggle">
+                    </div>
+                    <template v-if="candidate.regimeId == 2">
+                        <div class="form-row">
+                            <div class="input-container-one-item">
+                                <div class="input-wrapper">
+                                    <label for="profession">Profissão</label>
+                                    <input type="text"
+                                           name="profession"
+                                           id="profession"
+                                           v-model="candidate.profession">
+                                </div>
+                            </div>
+                            <div class="input-container-one-item">
+                                <div class="input-wrapper">
+                                    <label for="position_holds">Cargo que Ocupa</label>
+                                    <input type="text"
+                                           name="position_holds"
+                                           id="position_holds"
+                                           v-model="candidate.position">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container-one-item">
+                                <div class="input-wrapper">
+                                    <label for="employer">Entidade Empregadora</label>
+                                    <input 
+                                           type="text"
+                                           name="employer"
+                                           id="employer"
+                                           v-model="candidate.employerEntity">
+                                </div>
+                            </div>
+                            <div class="input-container-one-item">
+                                <div class="input-wrapper">
+                                    <label for="sector">Sector da Empressa</label>
+                                    <select 
+                                            id="sector"
+                                            name="Sector"
+                                            v-model="candidate.sectorId">
+                                        <option value="1">Privado</option>
+                                        <option value="2">Público</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <div class="form-row">
+                        <div v-if="candidate.regimeId == 2" class="input-container-one-item type2">
+                            <div class="input-wrapper iw-tp2">
+                                <label for="employerEntitytFile">Anexar Documento da Empresa(Opcional)</label>
+                                <input class="no-border-button"
+                                       type="file"
+                                       name="employerEntitytFile"
+                                       id="employerEntitytFile"
+                                       v-on:change="uploadworkCerficate($event)">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item type2">
+                            <div class="input-wrapper iw-tp2">
+                                <label for="payment_verification">Anexar Comprovativo de pagamento</label>
+                                <input class="no-border-button"
+                                        type="file"
+                                       name="payment_verification"
+                                       id="payment_verification"
+                                       v-on:change="uploadpaymentReceipt($event)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="terms">
+                        <h1>Termo de Compromisso</h1>
+                        <p>A prestação de falsas informações preenchidas neste formulário implicará a anulação da inscrição do candidato</p>
+                        <div class="terms-agreement">
+                            <label for="agreement">Concordo com o termo</label>
+                            <input type="checkbox"
+                                   name="agreement"
+                                   id="agreement"
+                                   v-model="checked">
+                        </div>
+                    </div>
+                    <div class="next-step-container">
+                        <div v-on:click="step2" class="btn cancel">
+                            Voltar
+                        </div>
+                        <button id="btnSave" type="submit" class="btn finish">
+                            Concluir
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+    @*<pre>{{$data}}</pre>*@
 </div>
+
+
+@section scripts{
+    <script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: '',
+            section1: true,
+            section2: false,
+            section3: false,
+            hide1: true,
+            step: 1,
+            checked: false,
+            graduation: {},
+            candidate: {
+                name: '',
+                birthdate: '',
+                maritalStatusId: 1,
+                genderId: 1,
+                fathersName: '',
+                mothersName: '',
+                nationalityId: 1,
+                cityId: 0,
+                documentUrl: null,
+                workCerficateUrl: null,
+                paymentReceiptUrl: null,
+                passportNumber: '',
+                email: '',
+                phoneNumber: '',
+                biNumber: '',
+                hightSchoolFinishedYear: 2021,
+                highSchool: null,
+                courseId: 0,
+                regimeId: 1,
+                employerEntity: '',
+                sectorId: '',
+                position: '',
+                profession: '',
+                documentFile: '',
+                highSchoolCertificateFile: null,
+                paymentReceiptFile: null,
+                workCerficateFile: null
+            },
+            lists: @Html.Raw(ViewBag.FormLists),
+        },
+        methods: {
+            step1: function () {
+
+                this.section1 = true;
+                this.section2 = false;
+                this.section3 = false;
+                this.step = 1;
+            },
+            step2: function () {
+                this.section1 = false;
+                this.section2 = true;
+                this.section3 = false;
+                this.step = 2;
+            },
+            step3: function () {
+                this.section1 = false;
+                this.section2 = false;
+                this.section3 = true;
+                this.step = 3;
+            },
+            toggle: function (element) {
+                this.hide1 = !this.hide1;
+            },
+
+            save() {
+                let self = this;
+                if (this.step == 1) {
+                    this.step2();
+                    return;
+                }
+                else if (this.step == 2) {
+                    this.step3();
+                    return;
+                }
+
+                if (!self.checked && self.step == 3) {
+                    alert("Precisa concordar com as nossas politicas");
+                    return;
+                }
+
+                $('#btnSave').prop("disabled", true);
+                $('#btnSave').html("Carregando...");
+
+
+
+                var formData = new FormData();
+
+                //step 1
+                formData.append('name', self.candidate.name)
+                formData.append('birthdate', self.candidate.birthdate)
+                formData.append('maritalStatusId', self.candidate.maritalStatusId)
+                formData.append('genderId', self.candidate.genderId)
+                formData.append('passportNumber', self.candidate.passportNumber)
+                formData.append('biNumber', self.candidate.biNumber)
+                formData.append('fathersName', self.candidate.fathersName)
+                formData.append('mothersName', self.candidate.mothersName)
+                formData.append('nationalityId', self.candidate.nationalityId)
+                formData.append('cityId', self.candidate.cityId)
+                formData.append('documentFile', self.candidate.documentFile)
+                formData.append('email', self.candidate.email)
+                formData.append('phoneNumber', self.candidate.phoneNumber)
+
+                //step2
+                formData.append('regimeId', self.candidate.courseId)
+                formData.append('highSchool', self.candidate.highSchool)
+                formData.append('hightSchoolFinishedYear', self.candidate.hightSchoolFinishedYear)
+                formData.append('highSchoolCertificateFile', self.candidate.highSchoolCertificateFile)
+
+                //step3
+                formData.append('sectorId', self.candidate.regimeId)
+                formData.append('profession', self.candidate.profession)
+                formData.append('position', self.candidate.position)
+                formData.append('employerEntity', self.candidate.employerEntity)
+                formData.append('sectorId', self.candidate.sectorId)
+                formData.append('paymentReceiptFile', self.candidate.paymentReceiptFile)
+                formData.append('workCerficateFile', self.candidate.workCerficateFile)
+
+
+                $.ajax({
+                    url: 'api/v1/candidates',
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    dataType: 'json',
+                    processData: false
+                }).done((res) => {
+                    if (res.success) {
+                        window.location = "/resume/" + res.object;
+                    }
+                    else {
+                        alert("Erro ao processar sua candidatura, verfique seus dados ou volte a tentar mais tarde");
+                    }
+                }).fail((res, status, error) => {
+                    alert("Erro ao processar sua candidatura, verfique sua internet ou volte a tentar mais tarde");
+                }).always(() => {
+                    $('#btnSave').prop("disabled", false);
+                    $('#btnSave').html("Concluir");
+                })
+            },
+
+
+            uploadDocument(event) {
+                this.candidate.documentFile = event.target.files[0]
+
+                const reader = new FileReader()
+                reader.addEventListener(
+                    'load',
+                    function () {
+                        this.candidate.documentFile = reader.result;
+                        //console.log(reader.result)
+                    }.bind(this),
+                    false
+                )
+                //console.log(reader.readAsDataURL(this.candidate.documentFile))
+
+            },
+            uploadhighSchoolCertificate(event) {
+                this.candidate.highSchoolCertificateFile = event.target.files[0]
+
+                const reader = new FileReader()
+                reader.addEventListener(
+                    'load',
+                    function () {
+                        this.candidate.highSchoolCertificateFile = reader.result;
+                        //console.log(reader.result)
+                    }.bind(this),
+                    false
+                )
+                //reader.readAsDataURL(this.candidate.highSchoolCertificateUrl)
+
+            },
+            uploadpaymentReceipt(event) {
+                this.candidate.paymentReceiptFile = event.target.files[0]
+
+                const reader = new FileReader()
+                reader.addEventListener(
+                    'load',
+                    function () {
+                        this.candidate.paymentReceiptFile = reader.result;
+                        console.log(reader.result)
+                    }.bind(this),
+                    false
+                )
+                //reader.readAsDataURL(this.candidate.paymentReceiptUrl)
+
+            },
+            uploadworkCerficate(event) {
+                this.candidate.workCerficateFile = event.target.files[0]
+
+                const reader = new FileReader()
+                reader.addEventListener(
+                    'load',
+                    function () {
+                        this.candidate.workCerficateFile = reader.result;
+                        console.log(reader.result)
+                    }.bind(this),
+                    false
+                )
+                //reader.readAsDataURL(this.candidate.workCerficateUrl)
+
+            },
+              },
+    });
+    </script>
+}

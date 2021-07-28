@@ -4,14 +4,16 @@ using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210726155637_addCoursesList")]
+    partial class addCoursesList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,9 +90,6 @@ namespace Data.Migrations
                     b.Property<int>("NationalityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
                     b.Property<string>("PassportNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -101,9 +100,6 @@ namespace Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Position")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Profession")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("RegimeId")
@@ -288,7 +284,7 @@ namespace Data.Migrations
                         new
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
-                            CreatedAt = new DateTime(2021, 7, 27, 12, 13, 39, 770, DateTimeKind.Utc).AddTicks(2937),
+                            CreatedAt = new DateTime(2021, 7, 26, 16, 56, 35, 160, DateTimeKind.Local).AddTicks(2813),
                             Email = "admin@admin.com",
                             FirstName = "Administrador de Sistema",
                             IsActive = true,

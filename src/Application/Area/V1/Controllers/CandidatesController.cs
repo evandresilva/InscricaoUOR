@@ -6,7 +6,7 @@ using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace Dalgy.Web.Areas.V1.Controllers
+namespace Application.Areas.V1.Controllers
 {
     [ApiController]
     public class CandidatesController : BaseController

@@ -9,6 +9,8 @@ namespace Data.Candidates
 {
    public class Candidate: BaseEntity
     {
+        [Column(Order = 1 )]
+        public int OrderNumber { get; set; }
         [Required]
         public string Name { get; set; }
         public DateTime Birthdate { get; set; }
@@ -36,6 +38,7 @@ namespace Data.Candidates
         public int? RegimeId { get; set; }
         public int? SectorId { get; set; }
         public string Position { get; set; }        
+        public string Profession { get; set; }        
         public string EmployerEntity { get; set; }        
         public int CandidatureStatusId { get; set; }
 

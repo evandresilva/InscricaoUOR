@@ -17,7 +17,7 @@ namespace Services.Models.DTO
         public DateTime Birthdate { get; set; }
         public int MaritalStatusId { get; set; }
         public int GenderId { get; set; }
-        [Required(ErrorMessage = "Informe do pai por favor")]
+        [Required(ErrorMessage = "Informe o nome do pai por favor")]
         [MaxLength(128, ErrorMessage = "Excedeu os 128 caracatres permitidos")]
         public string FathersName { get; set; }
         [Required(ErrorMessage = "Informe nome da mãe por favor")]
@@ -28,18 +28,22 @@ namespace Services.Models.DTO
         public string DocumentUrl { get; set; }
         public string WorkCerficateUrl { get; set; }
         public string PaymentReceiptUrl { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string PassportNumber { get; set; }
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email inválido")]
         public string Email { get; set; }
-        [Phone]
+        [Phone(ErrorMessage = "Insira um número de telefone válido")]
         public string PhoneNumber { get; set; }
+        [DisplayFormat(ConvertEmptyStringToNull = true)]
         public string BINumber { get; set; }
         public int HightSchoolFinishedYear { get; set; }
         public string HighSchool { get; set; }
         public int CourseId { get; set; }
-        public int? RegimeId { get; set; }
+        public int? RegimeId { get; set; } = 1;
         public int? SectorId { get; set; }
         public string Position { get; set; }
+        public string Profession { get; set; }
+        public string EmployerEntity { get; set; }
         [Required(ErrorMessage = "Anexe seu documento de identificação")]
         [JsonIgnore]
         public IFormFile DocumentFile { get; set; }
@@ -57,6 +61,7 @@ namespace Services.Models.DTO
         public CandidateDTOOutput(Candidate candidate)
         {
             Id = candidate.Id;
+            OrderNumber = candidate.OrderNumber;
             Name = candidate.Name;
             Birthdate = candidate.Birthdate;
             MaritalStatus = candidate.MaritalStatusId == 1 ? "Casado" : "Solteiro";
@@ -69,20 +74,24 @@ namespace Services.Models.DTO
             HighSchoolCertificateUrl = candidate.HighSchoolCertificateUrl;
             WorkCertificateUrl = candidate.WorkCertificateUrl;
             PaymentReceiptUrl = candidate.PaymentReceiptUrl;
-            PassportNumber = candidate.PassportNumber??"N/A";
-            BINumber = candidate.BINumber??"N/A";
+            PassportNumber = candidate.PassportNumber ?? "N/A";
+            BINumber = candidate.BINumber ?? "N/A";
             HightSchoolFinishedYear = candidate.HightSchoolFinishedYear;
             HighSchool = candidate.HighSchool;
             Course = candidate.Course?.Name;
             Graduation = candidate.Course?.Graduation?.Name;
-            Regime = ((Regime)(candidate.RegimeId??1)).GetDescription();
-            RegimeId = candidate.RegimeId??1;
-            Sector = ((Sector)(candidate.SectorId??0)).GetDescription();
+            Regime = ((Regime)(candidate.RegimeId ?? 1)).GetDescription();
+            RegimeId = candidate.RegimeId ?? 1;
+            Sector = ((Sector)(candidate.SectorId ?? 0)).GetDescription();
             Position = candidate.Position;
+            Profession = candidate.Profession;
+            EmployerEntity = candidate.EmployerEntity;
             BirthdateF = candidate.CreatedAt.ToString("dd-MM-yyyy HH:mm");
             Status = ((CandidatureStatus)(candidate.CandidatureStatusId)).GetDescription();
+            StatusId = candidate.CandidatureStatusId;
         }
         public Guid Id { get; set; }
+        public int OrderNumber { get; set; }
         public string Name { get; set; }
         public DateTime Birthdate { get; set; }
         public string MaritalStatus { get; set; }
@@ -102,10 +111,13 @@ namespace Services.Models.DTO
         public string Course { get; set; }
         public string Graduation { get; set; }
         public string Regime { get; set; }
-        public int RegimeId { get; set; }
+        public int? RegimeId { get; set; }
         public string Sector { get; set; }
         public string Position { get; set; }
+        public string Profession { get; set; }
+        public string EmployerEntity { get; set; }
         public string Status { get; set; }
+        public int StatusId { get; set; }
         public string BirthdateF { get; set; }
     }
 }

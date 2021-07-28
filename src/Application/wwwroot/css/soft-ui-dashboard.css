@@ -3965,7 +3965,7 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-  color: #cb0c9f;
+ /* color: #cb0c9f;*/
   border-color: #cb0c9f;
 }
 
@@ -3988,6 +3988,7 @@ fieldset:disabled .btn {
   color: #fff;
   background-color: #cb0c9f;
   border-color: #cb0c9f;
+  outline: none;
 }
 
 .btn-check:checked+.btn-outline-primary:focus,
@@ -5719,9 +5720,9 @@ fieldset:disabled .btn {
 
 .page-item.active .page-link {
   z-index: 3;
-  color: #fff;
-  background-color: #cb0c9f;
-  border-color: #cb0c9f;
+  color: #fff;/*
+  background-color: ;
+  border-color: #cb0c9f;*/
 }
 
 .page-item.disabled .page-link {
@@ -6028,9 +6029,9 @@ fieldset:disabled .btn {
 
 .list-group-item.active {
   z-index: 2;
-  color: #fff;
+  color: #fff;/*
   background-color: #cb0c9f;
-  border-color: #cb0c9f;
+  border-color: #cb0c9f;*/
 }
 
 .list-group-item+.list-group-item {
@@ -24423,7 +24424,9 @@ span.flatpickr-weekday {
 .noUi-horizontal {
   height: 3px;
 }
-
+.noOutline{
+    outline: none !important;
+}
 .noUi-horizontal .noUi-handle {
   border-radius: 50%;
   background-color: #fff;

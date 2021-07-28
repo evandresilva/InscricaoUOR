@@ -27,7 +27,7 @@ namespace Application.Controllers
             ViewBag.Begin = begin;
             ViewBag.End = end;
 
-            var result = _candidatureService.GetAll(page,take,filter,begin,end);
+            var result = _candidatureService.GetAll(page, take, filter, begin, end);
 
             if (result.Success)
             {
@@ -52,6 +52,20 @@ namespace Application.Controllers
             {
                 return StatusCode(500, "Erro ao consultar a pagina");
             }
+        }
+        public IActionResult ChangeState([FromRoute]Guid Id, [FromQuery]int statusId)
+        {
+            var result = _candidatureService.ChangeState(Id, statusId);
+
+            if (result.Success)
+            {
+                return RedirectToAction("Details", new { Id = Id });
+            }
+            else
+            {
+                return StatusCode(500, "Erro ao consultar a pagina");
+            }
+
         }
     }
 }

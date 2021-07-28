@@ -21,7 +21,7 @@
                                     <br />
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" class="form-control form-control" value="@filter" name="filter" placeholder="Pesquisa de nome, bi e pass." />
+                                            <input type="text" class="form-control noOutline" value="@filter" name="filter" placeholder="Pesquisa de nome, bi e pass." />
                                             @if (!string.IsNullOrWhiteSpace(filter))
                                             {
                                                 <a href=@Url.Action("Index", new { page=1, end,begin}) class="ml-2 btn" onclick=""> <i class="fas fa-times"></i> </a>
@@ -75,10 +75,10 @@
                                             <span class="text-secondary text-xs font-weight-bold">@item.BirthdateF</span>
                                         </td>
                                         <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm bg-gradient-success">@item.Status</span>
+                                            <span class="badge badge-sm bg-gradient-secondary">@item.Status</span>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="/candidaturesManagement/Details/@item.Id" class="text-secondary font-weight-bold btn-sm bg-gradient-dark text-white" data-toggle="tooltip" data-original-title="Ver detalhes">
+                                            <a href="/candidaturesManagement/Details/@item.Id" class="text-secondary font-weight-bold btn-sm bg-gradient-secondary text-white" data-toggle="tooltip" data-original-title="Ver detalhes">
                                                 Ver
                                             </a>
                                         </td>
@@ -101,8 +101,8 @@
                            LinkToLastPageFormat = "Fim",
                            ContainerDivClasses = new string[] { "d-flex justify-content-end" },
                            UlElementClasses = new string[] { "pagination" },
-                           LiElementClasses = new string[] { "page-item  btn-secundary" },
-                           PageClasses = new string[] { "page-link" },
+                           LiElementClasses = new string[] { "page-item" },
+                           PageClasses = new string[] { "page-link bg-gradient-secondary" },
                        }
                        )
                     </div>

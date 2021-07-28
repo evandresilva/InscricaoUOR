@@ -40,7 +40,8 @@ namespace Services
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
-                    Credentials = new System.Net.NetworkCredential(user, pass)
+                    Credentials = new System.Net.NetworkCredential(user, pass),
+                    TargetName = "UÓR - Inscrições"
                 };
 
                 MailMessage email = new MailMessage();
