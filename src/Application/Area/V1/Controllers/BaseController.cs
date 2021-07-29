@@ -37,20 +37,28 @@ namespace Application.Areas.V1.Controllers
         [NonAction]
         public string UploadDocument(IFormFile file, string folder, string id)
         {
-            var fileName = id.ToString() + Path.GetExtension(file.FileName);
-            var filePathVirtual = "/Storage" + "/" + folder + "/" + fileName;
-            var filePath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "Storage", folder);
-            if (System.IO.File.Exists(filePath))
-                System.IO.File.Delete(filePath);
-            if (!Directory.Exists(filePath))
-                Directory.CreateDirectory(filePath);
-            using (
-                var stream = System.IO.File.Create(Path.Combine(filePath, fileName)))
+            try
             {
-                file.CopyTo(stream);
+                var fileName = id.ToString() + Path.GetExtension(file.FileName);
+                var filePathVirtual = "/Storage" + "/" + folder + "/" + fileName;
+                var filePath = Path.Combine(Environment.CurrentDirectory, "wwwroot", "Storage", folder);
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+                if (!Directory.Exists(filePath))
+                    Directory.CreateDirectory(filePath);
+                using (
+                    var stream = System.IO.File.Create(Path.Combine(filePath, fileName)))
+                {
+                    file.CopyTo(stream);
+                }
+                return filePathVirtual;
+
             }
-            return filePathVirtual;
-        }
+            catch (Exception)
+            {
+                return null;
+            }
+            }
         [NonAction]
         public string DeleteFile(string UrlFile)
         {

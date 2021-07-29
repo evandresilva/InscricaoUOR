@@ -22,7 +22,7 @@ namespace Application.Controllers
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-                RedirectToAction("index", "home");
+                RedirectToAction("index", "admin");
             
                 return PartialView();
         }
@@ -51,7 +51,7 @@ namespace Application.Controllers
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity),new AuthenticationProperties { IsPersistent= true});
 
-                return RedirectToAction("index", "home");
+                return RedirectToAction("index", "admin");
             }
             else
             {

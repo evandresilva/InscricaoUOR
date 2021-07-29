@@ -32,20 +32,21 @@ namespace Services
             _db = db;
         }
 
-        public AppResult Add(CandidateDTOInput candidateDTO)
+        public AppResult Add(CandidateDTOInput dto)
         {
             var res = new AppResult();
             try
             {
-                if (_db.Candidates.Any(x => (x.BINumber.Trim().ToLower() == candidateDTO.BINumber.Trim().ToLower())
-                                       && x.CandidatureStatusId != (int)CandidatureStatus.Rejected))
+                if (_db.Candidates.Any(x => (!string.IsNullOrWhiteSpace(dto.BINumber) && x.BINumber.Trim().ToLower() == dto.BINumber.Trim().ToLower())
+                                       && x.CandidatureStatusId !=3))
                     return res.Bad("Já existe uma candidatura assoaciada a este número de BI");
-                if (_db.Candidates.Any(x => (x.PassportNumber.Trim().ToLower() == candidateDTO.PassportNumber.Trim().ToLower())
-                                       && x.CandidatureStatusId != (int)CandidatureStatus.Rejected))
+
+                if (_db.Candidates.Any(x => (!string.IsNullOrWhiteSpace(dto.PassportNumber) && x.PassportNumber.Trim().ToLower() == dto.PassportNumber.Trim().ToLower())
+                                       && x.CandidatureStatusId != 3))
                     return res.Bad("Já existe uma candidatura assoaciada a este número de passaporte");
 
 
-                var candidate = candidateDTO.MapTo<Candidate>();
+                var candidate = dto.MapTo<Candidate>();
                 candidate.Id = Guid.NewGuid();
                 candidate.CandidatureStatusId = 1;
                 candidate.IsActive = true;
@@ -59,9 +60,9 @@ namespace Services
 
                 return res.Good(candidate.OrderNumber);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return res.Bad();
+                return res.Bad(e.Message);
             }
         }
         private int GetLastOrderNumber()
@@ -90,7 +91,7 @@ namespace Services
                     .ThenInclude(x => x.Graduation)
                     .Where(x => !x.IsDeleted && x.IsActive);
                 if (!string.IsNullOrWhiteSpace(filter))
-                    qry = qry.Where(x => x.Name.ToLower().Contains(filter.ToLower()) || x.BINumber == filter || x.PassportNumber == filter);
+                    qry = qry.Where(x => x.Name.ToLower().Contains(filter.ToLower()) || x.BINumber == filter || x.PassportNumber == filter || x.OrderNumber.ToString() == filter);
                 if (begin.HasValue)
                     qry = qry.Where(x => x.CreatedAt.Date == begin);
                 if (begin.HasValue && end.HasValue)

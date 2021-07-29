@@ -99,37 +99,41 @@
                 <div class="card-header pb-0">
                     <h6>Inscritos Recentemente</h6>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                <div class="card-body">
+                    <div class="table-responsive">
                         <table class="table align-items-center mb-5">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">BI</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Passaporte</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
-                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Licenciatura</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Curso</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Nº Processo<th>
+                                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">BI/Passaporte</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Nome</th>
+                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Opção</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7  text-center">Curso</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7  text-center">Estado</th>
                                     <th class="text-end opacity-7"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.RecentCandidates)
                                 {
-                                <tr class="text-sm-center">
+                                <tr class="text-sm-center ">
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">@(item.BINumber ?? "N/A")</p>
+                                        <p class="text-xs font-weight-bold mb-0 text-center">@(item.OrderNumber.ToString())</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">@(item.PassportNumber ?? "N/A")</p>
+                                        <p class="text-xs font-weight-bold mb-0 text-center">@(item.BINumber ?? item.PassportNumber)</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.Name</p>
+                                        <p class="text-xs font-weight-bold mb-0 text-center">@item.Name</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.Graduation</p>
+                                        <p class="text-xs font-weight-bold mb-0 text-center">@item.Graduation</p>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">@item.Course</p>
+                                        <p class="text-xs font-weight-bold mb-0 text-center">@item.Course</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-secondary">@item.Status</span>
                                     </td>
                                     <td class="align-middle">
                                         <a href="/candidaturesManagement/Details/@item.Id" class="text-secondary font-weight-bold btn-sm bg-gradient-secondary text-white" data-toggle="tooltip" data-original-title="Edit user">
