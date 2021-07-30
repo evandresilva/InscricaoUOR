@@ -28,7 +28,7 @@ namespace Application
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("Conn2"))
+                options.UseSqlServer(Configuration.GetConnectionString("Conn"))
             );
             services.AddControllersWithViews();
             services.AddSwaggerGen(c =>
