@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Data.Candidates
 {
-   public class Candidate: BaseEntity
+    public class Candidate : BaseEntity
     {
-        [Column(Order = 1 )]
+        [Column(Order = 1)]
         public int OrderNumber { get; set; }
         [Required]
         public string Name { get; set; }
@@ -36,10 +36,11 @@ namespace Data.Candidates
         public string HighSchool { get; set; }
         public int CourseId { get; set; }
         public int? RegimeId { get; set; }
+        public bool IsEmployee { get; set; }
         public int? SectorId { get; set; }
-        public string Position { get; set; }        
-        public string Profession { get; set; }        
-        public string EmployerEntity { get; set; }        
+        public string Position { get; set; }
+        public string Profession { get; set; }
+        public string EmployerEntity { get; set; }
         public int CandidatureStatusId { get; set; }
 
         [ForeignKey("CourseId")]

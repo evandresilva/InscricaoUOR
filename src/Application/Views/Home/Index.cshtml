@@ -53,7 +53,8 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="full_name">Nome Completo</label>
-                                <input required  type="text"
+                                <input required="section1"
+                                       type="text"
                                        v-model="candidate.name"
                                        name="full_name"
                                        id="full_name">
@@ -62,7 +63,8 @@
                         <div class="input-container-two-items">
                             <div class="input-wrapper">
                                 <label for="born_date">Data de Nascimento</label>
-                                <input required  type="date"
+                                <input required="section1"
+                                       type="date"
                                        name="born_date"
                                        :max="minBirthDate"
                                        :value="minBirthDate"
@@ -71,11 +73,13 @@
                             </div>
                             <div class="input-wrapper">
                                 <label for="marital_status">Estado Civil</label>
-                                <select required  id="marital_status"
+                                <select :required="section1"
+                                        id="marital_status"
                                         name="marital_status"
                                         v-model="candidate.maritalStatusId">
-                                    <option value="1">Solteiro</option>
-                                    <option value="2">Casado</option>
+                                    <option value="1">Solteiro(a)</option>
+                                    <option value="2">Casado(a)</option>
+                                    <option value="3">Viúvo(a)</option>
                                     @*<option value="divorciado">Divorciado</option>
                                         <option value="viuvo">Vúvo</option>*@
                                 </select>
@@ -86,7 +90,8 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="telephone">Telemóvel</label>
-                                <input required  type="tel"
+                                <input :required="section1"
+                                       type="tel"
                                        name="telephone"
                                        id="telephone"
                                        v-model="candidate.phoneNumber">
@@ -95,7 +100,8 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="email">E-Mail</label>
-                                <input required  type="email"
+                                <input :required="section1"
+                                       type="email"
                                        name="email"
                                        id="email"
                                        v-model="candidate.email">
@@ -105,7 +111,8 @@
                     <div class="gender-container">
                         <h1>Sexo</h1>
                         <label for="male">Masculino</label>
-                        <input required  value="1"
+                        <input :required="section1"
+                               value="1"
                                type="radio"
                                checked
                                name="gender"
@@ -113,7 +120,8 @@
                                v-model="candidate.genderId">
 
                         <label for="female">Feminino</label>
-                        <input required  value="2"
+                        <input :required="section1"
+                               value="2"
                                type="radio"
                                name="gender"
                                id="female"
@@ -123,7 +131,8 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="mon_name">Nome da Mãe</label>
-                                <input required  type="text"
+                                <input required="section1"
+                                       type="text"
                                        name="mon_name"
                                        id="mon_name"
                                        v-model="candidate.mothersName">
@@ -132,7 +141,8 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="dad_name">Nome do Pai</label>
-                                <input required  type="text"
+                                <input :required="section1"
+                                       type="text"
                                        name="dad_name"
                                        id="dad_name"
                                        v-model="candidate.fathersName">
@@ -143,22 +153,22 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="bi_number">Nº de Bilhete de Identidade</label>
-                                <input required  type="text"
+                                <input :required="section1" type="text"
                                        name="bi_number"
                                        id="bi_number"
                                        pattern="\d{9}[A-Za-z]{2}\d{3}$"
-                                       v-bind:disabled="candidate.nationalityId!=1"
+                                       v-bind:disabled="country.id != 1"
                                        v-model="candidate.biNumber">
                             </div>
                         </div>
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="pass_number">Nº de Passaporte</label>
-                                <input required  type="text"
+                                <input required type="text"
                                        name="pass_number"
                                        id="pass_number"
                                        pattern="^(?!^0+$)[a-zA-Z0-9]{3,20}$"
-                                       v-bind:disabled="candidate.nationalityId==1"
+                                       v-bind:disabled="country.id == 1"
                                        v-model="candidate.passportNumber">
                             </div>
                         </div>
@@ -167,25 +177,25 @@
                         <div class="input-container-two-items">
                             <div class="input-wrapper">
                                 <label for="nationality">Nacionalidade</label>
-                                <select required  id="nationality"
+                                <select required id="nationality"
                                         name="nationality"
-                                        v-model="candidate.nationalityId">
-                                    <option v-for="i in lists.countries" :value="i.id">{{i.name}}</option>
+                                        v-model="country">
+                                    <option v-for="i in lists.countries" :value="i">{{i.name}}</option>
                                 </select>
                             </div>
                             <div class="input-wrapper">
                                 <label for="province">Provincia</label>
-                                <select required  id="province"
+                                <select required id="province"
                                         name="province"
                                         v-model="candidate.cityId">
-                                    <option v-for="i in lists.cities" :value="i.id">{{i.name}}</option>
+                                    <option v-for="i in country.cities" :value="i.id">{{i.name}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="input-container-one-item type2">
                             <div class="input-wrapper iw-tp2">
                                 <label for="file_verification">Anexar Arquivo de Identificação</label>
-                                <input required  class="no-border-button"
+                                <input required class="no-border-button"
                                        v-on:change="uploadDocument($event);"
                                        type="file"
                                        accept="image/*, .pdf, .doc, .docx"
@@ -195,9 +205,9 @@
                         </div>
                     </div>
                     <div class="next-step-container">
-                        <div class="btn cancel">
-                            Cancelar Inscrição
-                        </div>
+                        <a href="https://novo-site-uor.netlify.app" class="btn cancel">
+                            Ir para o Site
+                        </a>
                         <button type="submit" class="btn next">
                             Seguinte
                         </button>
@@ -209,16 +219,10 @@
             <section v-show="section2" class="step-two">
                 <div class="form-container">
                     <div class="form-row">
-                        @*<div class="input-container-one-item">
-                <div class="input-wrapper">
-                    <label for="literary_abilities">Habilitações Literárias</label>
-                    <input required   type="text" name="literary_abilities" id="literary_abilities">
-                </div>
-            </div>*@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="graduation">Opção</label>
-                                <select required id="graduation "
+                                <select :required="section2" id="graduation "
                                         v-model="graduation"
                                         name="option">
                                     <option selected disabled>Opção</option>
@@ -230,7 +234,7 @@
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
                                 <label for="course_to_apply">Curso a se candidatar</label>
-                                <select required id="course_to_apply"
+                                <select :required="section2" id="course_to_apply"
                                         name="course_to_apply"
                                         v-model="candidate.courseId">
                                     <option selected disabled>Curso</option>
@@ -242,8 +246,36 @@
                     <div class="form-row">
                         <div class="input-container-one-item">
                             <div class="input-wrapper">
+                                <label for="finished_school">Ano de Conclusão do Ensino Médio</label>
+                                <input :required="section2"
+                                       type="number"
+                                       name="finished_school_year"
+                                       id="finished_school_year"
+                                       v-model="candidate.hightSchoolFinishedYear">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="course_to_apply">Regime Pretendido</label>
+                                <select :required="section2"
+                                        id="course_to_apply"
+                                        name="course_to_apply"
+                                        v-model="candidate.regimeId">
+                                    <option selected disabled>Regime</option>
+                                    <option value="1">Normal</option>
+                                    <option value="2">Voluntário</option>
+                                    <option value="3">À distância</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
                                 <label for="finished_school">Escola onde concluiu</label>
-                                <input required  type="text"
+                                <input :required="section2"
+                                       type="text"
                                        name="finished_school"
                                        id="finished_school"
                                        v-model="candidate.highSchool">
@@ -252,27 +284,13 @@
                         <div class="input-container-one-item type2">
                             <div class="input-wrapper iw-tp2">
                                 <label for="hight_school_cert">Anexar Certificado de Ensino Médio</label>
-                                <input required  
+                                <input :required="section2"
                                        type="file"
                                        accept="image/*, .pdf, .doc, .docx"
                                        @*name="hight_school_cert"*@
                                        id="hight_school_cert"
                                        v-on:change="uploadhighSchoolCertificate($event)">
                             </div>
-                        </div>
-
-                    </div>
-                    <div class="form-row">
-                        <div class="input-container-one-item">
-                            <div class="input-wrapper">
-                                <label for="finished_school">Ano de Conclusão do Ensino Médio</label>
-                                <input required  type="number"
-                                       name="finished_school_year"
-                                       id="finished_school_year"
-                                       v-model="candidate.hightSchoolFinishedYear">
-                            </div>
-                        </div>
-                        <div class="input-container-one-item type2">
                         </div>
 
                     </div>
@@ -291,26 +309,28 @@
                     <div class="gender-container">
                         <h1>Exerce Actividade Profissional?</h1>
                         <label for="no">Não</label>
-                        <input required  type="radio"
-                               name="candidate.regimeId"
+                        <input :required="section3" type="radio"
+                               name="candidate.isEmployee"
                                id="no"
-                               v-model="candidate.regimeId"
-                               value="1"
+                               v-model="candidate.isEmployee"
+                               :value=false
                                v-on:click="toggle">
                         <label for="yes">Sim</label>
-                        <input required  type="radio"
-                               name="candidate.regimeId"
-                               v-model="candidate.regimeId"
+                        <input :required="section3"
+                               type="radio"
+                               name="candidate.isEmployee"
+                               v-model="candidate.isEmployee"
                                id="yes"
-                               value="2"
+                               :value=true
                                v-on:click="toggle">
                     </div>
-                    <template v-if="candidate.regimeId == 2">
+                    <template v-if="candidate.isEmployee">
                         <div class="form-row">
                             <div class="input-container-one-item">
                                 <div class="input-wrapper">
                                     <label for="profession">Profissão</label>
-                                    <input required  type="text"
+                                    <input :required="section3"
+                                           type="text"
                                            name="profession"
                                            id="profession"
                                            v-model="candidate.profession">
@@ -319,7 +339,7 @@
                             <div class="input-container-one-item">
                                 <div class="input-wrapper">
                                     <label for="position_holds">Cargo que Ocupa</label>
-                                    <input required  type="text"
+                                    <input :required="section3" type="text"
                                            name="position_holds"
                                            id="position_holds"
                                            v-model="candidate.position">
@@ -330,7 +350,7 @@
                             <div class="input-container-one-item">
                                 <div class="input-wrapper">
                                     <label for="employer">Entidade Empregadora</label>
-                                    <input required  type="text"
+                                    <input :required="section3" type="text"
                                            name="employer"
                                            id="employer"
                                            v-model="candidate.employerEntity">
@@ -339,7 +359,8 @@
                             <div class="input-container-one-item">
                                 <div class="input-wrapper">
                                     <label for="sector">Sector da Empressa</label>
-                                    <select required id="sector"
+                                    <select :required="section3"
+                                            id="sector"
                                             name="Sector"
                                             v-model="candidate.sectorId">
                                         <option value="1">Privado</option>
@@ -350,7 +371,7 @@
                         </div>
                     </template>
                     <div class="form-row">
-                        <div v-if="candidate.regimeId == 2" class="input-container-one-item type2">
+                        <div v-if="candidate.isEmployee" class="input-container-one-item type2">
                             <div class="input-wrapper iw-tp2">
                                 <label for="employerEntitytFile">Anexar Documento da Empresa(Opcional)</label>
                                 <input class="no-border-button"
@@ -364,7 +385,8 @@
                         <div class="input-container-one-item type2">
                             <div class="input-wrapper iw-tp2">
                                 <label for="payment_verification">Anexar Comprovativo de pagamento</label>
-                                <input required  class="no-border-button"
+                                <input :required="section3"
+                                       class="no-border-button"
                                        type="file"
                                        accept="image/*, .pdf, .doc, .docx"
                                        @*name="payment_verification"*@
@@ -378,7 +400,7 @@
                         <p>A prestação de falsas informações preenchidas neste formulário implicará a anulação da inscrição do candidato</p>
                         <div class="terms-agreement">
                             <label for="agreement">Concordo com o termo</label>
-                            <input required type="checkbox"
+                            <input :required="section3" type="checkbox"
                                    name="agreement"
                                    id="agreement"
                                    v-model="checked">
@@ -429,6 +451,7 @@
             errorModal:false,
             checked: false,
             graduation: {},
+            country: {},
             modalToggle: false,
             candidate: {
                 name: '',
@@ -450,6 +473,7 @@
                 highSchool: null,
                 courseId: 0,
                 regimeId: 1,
+                isEmployee: false,
                 employerEntity: '',
                 sectorId: '',
                 position: '',
@@ -467,7 +491,8 @@
             var month = d.getMonth();
             var day = d.getDate();
             var c = new Date(year - 17, month, day);
-            this.minBirthDate =  c.toISOString().split('T')[0];
+            this.minBirthDate = c.toISOString().split('T')[0];
+            this.country = this.lists.countries[0];
             },
         methods: {
 
@@ -530,7 +555,7 @@
                 formData.append('biNumber', self.candidate.biNumber)
                 formData.append('fathersName', self.candidate.fathersName)
                 formData.append('mothersName', self.candidate.mothersName)
-                formData.append('nationalityId', self.candidate.nationalityId)
+                formData.append('nationalityId', self.country.id)
                 formData.append('cityId', self.candidate.cityId)
                 formData.append('documentFile', self.candidate.documentFile)
                 formData.append('email', self.candidate.email)
@@ -543,6 +568,7 @@
                 formData.append('highSchoolCertificateFile', self.candidate.highSchoolCertificateFile)
 
                 //step3
+                formData.append('isEmployee', self.candidate.isEmployee)
                 formData.append('regimeId', self.candidate.regimeId)
                 formData.append('profession', self.candidate.profession)
                 formData.append('position', self.candidate.position)

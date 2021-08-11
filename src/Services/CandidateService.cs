@@ -95,9 +95,9 @@ namespace Services
                 if (begin.HasValue)
                     qry = qry.Where(x => x.CreatedAt.Date == begin);
                 if (begin.HasValue && end.HasValue)
-                    qry = qry.Where(x => x.CreatedAt.Date <= end && x.CreatedAt.Date >= begin);
+                    qry = qry.OrderBy(x=>x.CreatedAt).Where(x => x.CreatedAt.Date <= end && x.CreatedAt.Date >= begin);
 
-                var list = qry.Select(x => new CandidateDTOOutput(x)).ToPagedList(page, take);
+                var list = qry.OrderByDescending(x=>x.CreatedAt).Select(x => new CandidateDTOOutput(x)).ToPagedList(page, take);
                 return res.Good(list);
             }
             catch (Exception)
@@ -184,15 +184,15 @@ namespace Services
             var res = new AppResult();
             try
             {
-                var countries = _db.Countries.Where(x => x.IsActive && !x.IsDeleted).ToList();
-                var cities = _db.Cities.Where(x => x.IsActive && !x.IsDeleted && x.Country.Name == "Angola").ToList();
+                var countries = _db.Countries.Include(x=>x.Cities).Where(x => x.IsActive && !x.IsDeleted).ToList();
+                //var cities = _db.Cities.Where(x => x.IsActive && !x.IsDeleted).ToList();
                 var graduations = _db.Graduations.Include(x => x.Courses.Where(x => x.IsActive && !x.IsDeleted))
                                             .Where(x => x.IsActive && !x.IsDeleted).ToList();
 
                 return res.Good(new FormListsDTO
                 {
                     Countries = countries?.Select(x => new CountryDTO(x)).ToList(),
-                    Cities = cities?.Select(x => new CityDTO(x)).ToList(),
+                    //Cities = cities?.Select(x => new CityDTO(x)).ToList(),
                     Graduations = graduations?.Select(x => new GraduationDTO(x)).ToList()
 
                 });
@@ -214,6 +214,10 @@ namespace Services
                 candidate.CandidatureStatusId = status;
                 _db.Candidates.Update(candidate);
                 _db.SaveChanges();
+
+                _comunicationService.SendEmail(candidate.Email, $"O estado de sua candidatura foi alterado para {((CandidatureStatus)status).GetDescription()}" +
+                    $"<br/> qualquer dúvida não esite em contactar", "Inscrição Universidade Óscar Ribas");
+
                 return res.Good();
             }
             catch (Exception)

@@ -10,7 +10,9 @@
                 <div class="card-header pb-0 px-3">
                     <h6 class="mb-0">Informações do candidato</h6>
                     <h6 class="mb-0">Nº @Model.OrderNumber</h6>
+                        <a class="btn btn-sm bg-gradient-dark" href="/resume/@Model.OrderNumber"><i class="fa fa-print" aria-hidden="true"></i>&nbsp;&nbsp;Ver resumo</a>
                 </div>
+
                 <div class="card-body pt-3 p-3">
                     <ul class="list-group">
                         <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
@@ -31,6 +33,9 @@
                                 <span class="mb-2 text-xs">Nacionalidade:<span class="text-dark font-weight-bold ms-sm-2">@Model.BINumber</span></span>
                                 <span class="mb-2 text-xs">Província:<span class="text-dark ms-sm-2 font-weight-bold">@Model.City</span></span>
 
+                                <span class="mb-2 text-xs">Email:<span class="text-dark font-weight-bold ms-sm-2">@Model.Email</span></span>
+                                <span class="mb-2 text-xs">Telemóvel:<span class="text-dark ms-sm-2 font-weight-bold">@Model.PhoneNumber</span></span>
+
                             </div>
                         </li>
                         <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
@@ -40,14 +45,15 @@
                                 <span class="mb-2 text-xs">Curso:<span class="text-dark ms-sm-2 font-weight-bold">@Model.Course</span></span>
                                 <span class="mb-2 text-xs">Conclusão de enisno médio:<span class="text-dark ms-sm-2 font-weight-bold">@Model.HightSchoolFinishedYear</span></span>
                                 <span class="mb-2 text-xs">Escola de ensino médio:<span class="text-dark ms-sm-2 font-weight-bold">@Model.HighSchool</span></span>
+                                <span class="mb-2 text-xs">Regime pretendido:<span class="text-dark ms-sm-2 font-weight-bold">@Model.Regime</span></span>
                             </div>
                         </li>
                         @{
-                            if (Model.RegimeId == 2)
+                            if (Model.IsEmployee)
                             {
                                 <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
                                     <div class="d-flex flex-column">
-                                        <h6 class="mb-3 text-sm">Regime de  voluntário: </h6>
+                                        <h6 class="mb-3 text-sm">Informações profissionais: </h6>
                                         <span class="mb-2 text-xs"> Entidade patronal:<span class="text-dark ms-sm-2 font-weight-bold">@Model.EmployerEntity</span></span>
                                         <span class="mb-2 text-xs">Sector:<span class="text-dark ms-sm-2 font-weight-bold">@Model.Sector</span></span>
                                         <span class="mb-2 text-xs">profissão:<span class="text-dark ms-sm-2 font-weight-bold">@Model.Profession</span></span>
@@ -55,14 +61,14 @@
                                     </div>
                                 </li>
                             }
-                            else
+                            @*else
                             {
                                 <li class="list-group-item border-0 d-flex p-4 mb-2 mt-3 bg-gray-100 border-radius-lg">
                                     <div class="d-flex flex-column">
                                         <h6 class="mb-3 text-sm">Aluno em regime <strong>normal</strong></h6>
                                     </div>
                                 </li>
-                            }
+                            }*@
                         }
                     </ul>
                 </div>
@@ -109,7 +115,7 @@
                         </li>
                         <hr />
                         @{
-                            if (Model.RegimeId == 2)
+                            if (Model.IsEmployee && !string.IsNullOrWhiteSpace(Model.WorkCertificateUrl))
                             {
 
                                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
@@ -134,8 +140,6 @@
                             </div>
                         </div>
                     </div>
-                    @if (Model.StatusId == 1)
-                    {
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-6">
@@ -146,7 +150,6 @@
                                 </div>
                             </div>
                         </div>
-                    }
                 </div>
             </div>
         </div>

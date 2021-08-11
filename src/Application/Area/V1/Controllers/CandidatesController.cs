@@ -28,11 +28,12 @@ namespace Application.Areas.V1.Controllers
 
             candidate.DocumentUrl = UploadDocument(candidate.DocumentFile, folderName + "/Document", fileName);
             candidate.PaymentReceiptUrl = UploadDocument(candidate.PaymentReceiptFile, folderName + "/Payment", fileName);
-            candidate.WorkCerficateUrl = UploadDocument(candidate.HighSchoolCertificateFile, folderName + "/HighSchoolCertificate", fileName);
-            candidate.WorkCerficateUrl = UploadDocument(candidate.WorkCerficateFile, folderName + "/WorkCerficate", fileName);
+            candidate.HighSchoolCertificateUrl = UploadDocument(candidate.HighSchoolCertificateFile, folderName + "/HighSchoolCertificate", fileName);
+            if (candidate.WorkCerficateFile != null)
+                candidate.WorkCerficateUrl = UploadDocument(candidate.WorkCerficateFile, folderName + "/WorkCerficate", fileName);
 
             var result = _Candidateservice.Add(candidate);
-            
+
             if (result.Success)
                 return Ok(result);
             else

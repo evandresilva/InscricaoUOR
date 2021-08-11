@@ -110,13 +110,15 @@ button {
 
     #section-to-print, #section-to-print * {
         visibility: visible;
+       
     }
 
-   /* #section-to-print {
+    #section-to-print {
         position: absolute;
         left: 0;
+        right:auto;
         top: 0;
-    }*/
+    }
 
     .container-sucess {
         width: 100%;

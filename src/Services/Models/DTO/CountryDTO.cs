@@ -13,9 +13,11 @@ namespace Services.Models.DTO
         {
             Id = country.Id;
             Name = country.Name;
+            Cities = country?.Cities.Select(x => new CityDTO(x)).ToList();
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<CityDTO> Cities { get; set; }
     }
     public class CityDTO
     {

@@ -18,7 +18,9 @@ namespace Services.Models
         [Description("Normal")]
         Normal = 1,
         [Description("Voluntário")]
-        Working
+        Working,
+        [Description("À distância")]
+         AtDistance
     }
     public enum Gender
     {
@@ -35,6 +37,15 @@ namespace Services.Models
         Exam,
         [Description("Rejeitado")]
         Rejected,
+    }
+    public enum MaritalStatus
+    {
+        [Description("Solteiro(a)")]
+        Single= 1,
+        [Description("Casado(a)")]
+        Married,
+        [Description("Viúvo(a)")]
+        Widower,
     }
 
 }

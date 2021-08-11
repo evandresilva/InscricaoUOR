@@ -26,6 +26,7 @@ namespace Services.Models.DTO
         public int NationalityId { get; set; }
         public int CityId { get; set; }
         public string DocumentUrl { get; set; }
+        public string HighSchoolCertificateUrl { get; set; }
         public string WorkCerficateUrl { get; set; }
         public string PaymentReceiptUrl { get; set; }
         [DisplayFormat(ConvertEmptyStringToNull = true)]
@@ -40,6 +41,7 @@ namespace Services.Models.DTO
         public string HighSchool { get; set; }
         public int CourseId { get; set; }
         public int? RegimeId { get; set; } = 1;
+        public bool IsEmployee { get; set; }
         public int? SectorId { get; set; }
         public string Position { get; set; }
         public string Profession { get; set; }
@@ -64,11 +66,13 @@ namespace Services.Models.DTO
             OrderNumber = candidate.OrderNumber;
             Name = candidate.Name;
             Birthdate = candidate.Birthdate;
-            MaritalStatus = candidate.MaritalStatusId == 1 ? "Casado" : "Solteiro";
+            MaritalStatus = ((MaritalStatus)candidate.MaritalStatusId).GetDescription();
             Gender = ((Gender)candidate.GenderId).GetDescription();
             FathersName = candidate.FathersName;
             MothersName = candidate.MothersName;
             Nationality = candidate.Nationality?.Name ?? "N/A";
+            PhoneNumber = candidate.PhoneNumber;
+            Email = candidate.Email;
             City = candidate.City?.Name ?? "N/A";
             DocumentUrl = candidate.DocumentUrl;
             HighSchoolCertificateUrl = candidate.HighSchoolCertificateUrl;
@@ -80,6 +84,7 @@ namespace Services.Models.DTO
             HighSchool = candidate.HighSchool;
             Course = candidate.Course?.Name;
             Graduation = candidate.Course?.Graduation?.Name;
+            IsEmployee = candidate.IsEmployee;
             Regime = ((Regime)(candidate.RegimeId ?? 1)).GetDescription();
             RegimeId = candidate.RegimeId ?? 1;
             Sector = ((Sector)(candidate.SectorId ?? 0)).GetDescription();
@@ -89,6 +94,7 @@ namespace Services.Models.DTO
             BirthdateF = candidate.CreatedAt.ToString("dd-MM-yyyy HH:mm");
             Status = ((CandidatureStatus)(candidate.CandidatureStatusId)).GetDescription();
             StatusId = candidate.CandidatureStatusId;
+
         }
         public Guid Id { get; set; }
         public int OrderNumber { get; set; }
@@ -99,6 +105,8 @@ namespace Services.Models.DTO
         public string FathersName { get; set; }
         public string MothersName { get; set; }
         public string Nationality { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public string City { get; set; }
         public string DocumentUrl { get; set; }
         public string HighSchoolCertificateUrl { get; set; }
@@ -112,6 +120,7 @@ namespace Services.Models.DTO
         public string Graduation { get; set; }
         public string Regime { get; set; }
         public int? RegimeId { get; set; }
+        public bool IsEmployee { get; set; }
         public string Sector { get; set; }
         public string Position { get; set; }
         public string Profession { get; set; }
