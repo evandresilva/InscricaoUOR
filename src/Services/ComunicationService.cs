@@ -34,9 +34,9 @@ namespace Services
             {
                 SmtpClient smtpClient = new SmtpClient
                 {
-                    Port = 25,
+                    Port = int.Parse(port),
                     Host = server,
-                    Timeout = 60000,
+                    //Timeout = 60000,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
@@ -55,7 +55,7 @@ namespace Services
                 smtpClient.Send(email);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return false;
             }
@@ -95,7 +95,7 @@ namespace Services
                 smtpClient.Send(email);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 return false;
             }

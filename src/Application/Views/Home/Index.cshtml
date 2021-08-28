@@ -81,7 +81,7 @@
                                     <option value="2">Casado(a)</option>
                                     <option value="3">Viúvo(a)</option>
                                     @*<option value="divorciado">Divorciado</option>
-                                        <option value="viuvo">Vúvo</option>*@
+                        <option value="viuvo">Vúvo</option>*@
                                 </select>
                             </div>
                         </div>
@@ -150,30 +150,6 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="input-container-one-item">
-                            <div class="input-wrapper">
-                                <label for="bi_number">Nº de Bilhete de Identidade</label>
-                                <input :required="section1" type="text"
-                                       name="bi_number"
-                                       id="bi_number"
-                                       pattern="\d{9}[A-Za-z]{2}\d{3}$"
-                                       v-bind:disabled="country.id != 1"
-                                       v-model="candidate.biNumber">
-                            </div>
-                        </div>
-                        <div class="input-container-one-item">
-                            <div class="input-wrapper">
-                                <label for="pass_number">Nº de Passaporte</label>
-                                <input required type="text"
-                                       name="pass_number"
-                                       id="pass_number"
-                                       pattern="^(?!^0+$)[a-zA-Z0-9]{3,20}$"
-                                       v-bind:disabled="country.id == 1"
-                                       v-model="candidate.passportNumber">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
                         <div class="input-container-two-items">
                             <div class="input-wrapper">
                                 <label for="nationality">Nacionalidade</label>
@@ -204,8 +180,32 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="bi_number">Nº de Bilhete de Identidade</label>
+                                <input :required="section1" type="text"
+                                       name="bi_number"
+                                       id="bi_number"
+                                       pattern="\d{9}[A-Za-z]{2}\d{3}$"
+                                       v-bind:disabled="country.id != 1"
+                                       v-model="candidate.biNumber">
+                            </div>
+                        </div>
+                        <div class="input-container-one-item">
+                            <div class="input-wrapper">
+                                <label for="pass_number">Nº de Passaporte</label>
+                                <input required type="text"
+                                       name="pass_number"
+                                       id="pass_number"
+                                       pattern="^(?!^0+$)[a-zA-Z0-9]{3,20}$"
+                                       v-bind:disabled="country.id == 1"
+                                       v-model="candidate.passportNumber">
+                            </div>
+                        </div>
+                    </div>
                     <div class="next-step-container">
-                        <a href="https://novo-site-uor.netlify.app" class="btn cancel">
+                        <a href="http://uor.ed.ao" class="btn cancel">
                             Ir para o Site
                         </a>
                         <button type="submit" class="btn next">
@@ -396,6 +396,14 @@
                         </div>
                     </div>
                     <div class="terms">
+                        <h1>Cordenada bancária UOR</h1>
+                        <p>
+                            Banco: BIC <br />
+                            Nome da conta: BIC REITORIA <br />
+                            Conta: 13521024/10/001 <br />
+                            IBAN: O06005100001352102410188 <br />
+                        </p>
+                        <br />
                         <h1>Termo de Compromisso</h1>
                         <p>A prestação de falsas informações preenchidas neste formulário implicará a anulação da inscrição do candidato</p>
                         <div class="terms-agreement">
